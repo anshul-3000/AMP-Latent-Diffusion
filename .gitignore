@@ -1,0 +1,53 @@
+# Python
+__pycache__/
+*.py[cod]
+*.so
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Datasets
+data/*
+!data/processed_data&code/
+!data/processed_data&code/*.ipynb
+*.csv
+*.xlsx
+*.xls
+
+# Model checkpoints / weights
+*.pt
+*.pth
+*.ckpt
+*.safetensors
+*.pkl
+
+# Large embeddings
+*.npy
+*.npz
+
+# Generated outputs
+results/
+outputs/
+generated/
+# Generated property-analysis outputs
+properties/*.csv
+properties/*.xlsx
+
+# Logs
+*.log
+
+# Environment
+.env
+.venv/
+venv/
+env/
+
+# OS
+.DS_Store
+Thumbs.db
+# Experimental / deprecated notebooks
+diffusion/gru_decoder.ipynb
+diffusion/transformer_decoder.ipynb
+new_diffusion/short_peptide_experiment.ipynb
+new_diffusion/teacher_forced_vae.ipynb
+new_diffusion/transformer_vae_len30.ipynb
