@@ -293,9 +293,6 @@ The Transformer-VAE is used to learn continuous latent representations of peptid
 Conceptually:
 
 ```
-```
-
-```
 Peptide Sequence
        │
        ▼
