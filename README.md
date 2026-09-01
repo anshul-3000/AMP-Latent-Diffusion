@@ -34,7 +34,6 @@ The framework separately models **short peptides (5–40 amino acids)** and **lo
 - [Physicochemical Analysis](#physicochemical-analysis)
 - [Amino Acid Composition Analysis](#amino-acid-composition-analysis)
 - [Embedding-Space Analysis](#embedding-space-analysis)
-- [Experimental Results](#experimental-results)
 - [Repository Structure](#repository-structure)
 - [Reproducibility](#reproducibility)
 - [Computational Requirements](#computational-requirements)
@@ -539,59 +538,6 @@ final_analysis.ipynb
 
 ---
 
-# Experimental Results
-
-The current computational pipeline produced the following candidate statistics:
-
-| MetricResult            |       |
-| ----------------------- | ----- |
-| AMP training sequences  | 8,400 |
-| Short-branch candidates | 5,343 |
-| Long-branch candidates  | 1,749 |
-| Novel candidates        | 7,011 |
-
-The final generated candidate population was evaluated through:
-
--  AMP probability screening 
--  Hemolysis probability screening 
--  Novelty analysis 
--  Physicochemical characterization 
--  Amino acid composition analysis 
--  UMAP embedding analysis 
-
----
-
-# Physicochemical Summary
-
-## Short-Peptide Candidates
-
-The observed mean properties for the analyzed short-peptide population were:
-
-| PropertyMean      |            |
-| ----------------- | ---------- |
-| Length            | 17.43 aa   |
-| Molecular Weight  | 2023.56 Da |
-| pI                | 10.15      |
-| Aromaticity       | 0.107      |
-| Instability Index | 30.09      |
-
----
-
-## Long-Peptide Candidates
-
-The observed mean properties for the analyzed long-peptide population were:
-
-| PropertyMean      |            |
-| ----------------- | ---------- |
-| Length            | 47.71 aa   |
-| Molecular Weight  | 5291.93 Da |
-| pI                | 8.78       |
-| Aromaticity       | 0.078      |
-| Instability Index | 39.70      |
-
-These values describe computationally generated candidate populations and should not be interpreted as experimentally validated biological measurements.
-
----
 
 # Repository Structure
 
