@@ -271,9 +271,6 @@ Long Peptide Candidates
 Relevant notebooks:
 
 ```
-```
-
-```
 new_diffusion/
 │
 ├── prepare_sequences_len60_v2.ipynb
@@ -328,9 +325,6 @@ Separate models are trained for the two length regimes.
 Implementations:
 
 ```
-```
-
-```
 new_diffusion/final_model/transformer_vae_len40.ipynb
 new_diffusion/final_model/transformer_vae_len60.ipynb
 ```
@@ -342,9 +336,6 @@ new_diffusion/final_model/transformer_vae_len60.ipynb
 The diffusion process operates on the learned continuous latent representation rather than directly on discrete amino-acid tokens.
 
 The conceptual process is:
-
-```
-```
 
 ```
 Training Latents
@@ -367,9 +358,6 @@ Separate latent diffusion models are used for the short and long peptide branche
 Implementations:
 
 ```
-```
-
-```
 new_diffusion/final_model/diffusion__len40_v2.ipynb
 new_diffusion/final_model/diffusion__len60_v2.ipynb
 ```
@@ -379,9 +367,6 @@ new_diffusion/final_model/diffusion__len60_v2.ipynb
 # LSTM Sequence Decoding
 
 The generated latent vectors are converted back into amino-acid sequences using branch-specific LSTM decoders.
-
-```
-```
 
 ```
 Generated Latent
@@ -399,18 +384,12 @@ Generated Peptide
 Separate decoders are used for:
 
 ```
-```
-
-```
 Short branch → 5–40 aa
 
 Long branch → 41–60 aa
 ```
 
 Implementations:
-
-```
-```
 
 ```
 new_diffusion/final_model/lstm_decoder_len40.ipynb
@@ -426,9 +405,6 @@ Generated peptide sequences are evaluated using a multi-stage computational scre
 ## Stage 1 — AMP Activity Screening
 
 The AMP classifier estimates:
-
-```
-```
 
 ```
 P(AMP | sequence)
@@ -451,9 +427,6 @@ Candidates with lower predicted hemolysis probability are prioritized.
 The generated candidates are ranked using a combined score incorporating antimicrobial activity and predicted hemolytic potential.
 
 The overall screening pipeline is:
-
-```
-```
 
 ```
 Generated Peptides
@@ -483,9 +456,6 @@ Novelty is evaluated at the sequence level relative to the AMP training dataset.
 A generated peptide is considered **training-set novel** when its exact sequence is absent from the AMP training sequence set.
 
 ```
-```
-
-```
 Generated Peptide
        │
        ▼
@@ -501,9 +471,6 @@ Compare with AMP Training Set
 ```
 
 The final analysis is implemented in:
-
-```
-```
 
 ```
 final_analysis.ipynb
@@ -532,9 +499,6 @@ Selected generated candidates are characterized using:
 Implementation:
 
 ```
-```
-
-```
 properties/property_extraction.ipynb
 ```
 
@@ -561,9 +525,6 @@ High-dimensional ESM-derived peptide embeddings are projected into two dimension
 The visualization is used to examine the representation-space distribution of:
 
 ```
-```
-
-```
 Known AMP sequences
         vs.
 Generated / Novel peptide sequences
@@ -572,9 +533,6 @@ Generated / Novel peptide sequences
 The analysis helps investigate whether generated peptides occupy representation-space regions related to known AMPs while also exploring surrounding sequence space.
 
 Implementation:
-
-```
-```
 
 ```
 final_analysis.ipynb
@@ -641,9 +599,6 @@ These values describe computationally generated candidate populations and should
 # Repository Structure
 
 ```
-```
-
-```
 AMP-Latent-Diffusion/
 │
 ├── .gitignore
@@ -703,9 +658,6 @@ The recommended execution order is:
 Run:
 
 ```
-```
-
-```
 data/processed_data&code/dataset.ipynb
 data/processed_data&code/nonamp_dataset.ipynb
 data/processed_data&code/hemolysis_dataset.ipynb
@@ -720,9 +672,6 @@ Prepare and clean the required sequence datasets.
 Run:
 
 ```
-```
-
-```
 embeddings/embedding_generation.ipynb
 ```
 
@@ -735,9 +684,6 @@ Generate the required ESM-based sequence representations.
 Run:
 
 ```
-```
-
-```
 classifers/amp_classifier.ipynb
 ```
 
@@ -748,9 +694,6 @@ classifers/amp_classifier.ipynb
 Run:
 
 ```
-```
-
-```
 classifers/hemolysis_classifier.ipynb
 ```
 
@@ -759,9 +702,6 @@ classifers/hemolysis_classifier.ipynb
 ## Step 5 — Prepare Length-Specific AMP Sequences
 
 Prepare the two peptide regimes:
-
-```
-```
 
 ```
 Short: 5–40 aa
@@ -778,9 +718,6 @@ Use the corresponding sequence preparation notebooks.
 Train the two branch-specific models:
 
 ```
-```
-
-```
 new_diffusion/final_model/transformer_vae_len40.ipynb
 
 new_diffusion/final_model/transformer_vae_len60.ipynb
@@ -793,9 +730,6 @@ new_diffusion/final_model/transformer_vae_len60.ipynb
 Run:
 
 ```
-```
-
-```
 new_diffusion/extract_latents/extract_latents40.ipynb
 
 new_diffusion/extract_latents/extract_latents60.ipynb
@@ -806,9 +740,6 @@ new_diffusion/extract_latents/extract_latents60.ipynb
 ## Step 8 — Train Latent Diffusion Models
 
 Run:
-
-```
-```
 
 ```
 new_diffusion/final_model/diffusion__len40_v2.ipynb
@@ -827,9 +758,6 @@ Generate new latent representations independently for the short and long branche
 ## Step 10 — Decode Generated Latents
 
 Run the corresponding LSTM decoder:
-
-```
-```
 
 ```
 new_diffusion/final_model/lstm_decoder_len40.ipynb
@@ -862,9 +790,6 @@ Compare generated candidates against the AMP training sequence set.
 Run:
 
 ```
-```
-
-```
 properties/property_extraction.ipynb
 ```
 
@@ -873,9 +798,6 @@ properties/property_extraction.ipynb
 ## Step 15 — Final Analysis
 
 Run:
-
-```
-```
 
 ```
 final_analysis.ipynb
@@ -926,10 +848,7 @@ Exact package versions may depend on the computational environment used for the 
 
 Large data and model artifacts are intentionally excluded from this repository.
 
-The following file types are ignored:
-
-```
-```
+The following file types are ignored:`
 
 ```
 *.csv
@@ -1054,9 +973,6 @@ Universal Protein Resource:
 # Citation
 
 If this repository contributes to academic research, please cite the associated publication:
-
-```
-```
 
 ```
 Citation information will be added after publication.
