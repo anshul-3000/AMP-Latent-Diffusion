@@ -1,65 +1,102 @@
 # AMP-Latent-Diffusion
 
-## Dual-Branch Latent Diffusion Framework for Novel Antimicrobial Peptide Generation
+### Dual-Branch Latent Diffusion Framework for Novel Antimicrobial Peptide Generation
 
-This repository contains the implementation of a deep generative framework for computational antimicrobial peptide (AMP) discovery. The framework combines Transformer-based Variational Autoencoders (Transformer-VAE), latent diffusion modeling, branch-specific LSTM sequence decoders, AMP activity prediction, hemolysis screening, novelty analysis, and physicochemical characterization.
-
-The proposed approach separately models short and long peptide regimes to explore antimicrobial peptide sequence space while maintaining predicted antimicrobial activity and low hemolytic potential.
+A deep generative framework for computational antimicrobial peptide (AMP) discovery that combines Transformer-based Variational Autoencoders (Transformer-VAE), latent diffusion modeling, branch-specific LSTM sequence decoders, AMP activity prediction, hemolysis screening, novelty analysis, physicochemical characterization, amino-acid composition analysis, and embedding-space visualization.
 
 ---
 
-## Framework Overview
+## Overview
 
-The overall workflow is:
+Antimicrobial peptides are promising candidates for addressing the growing problem of antimicrobial resistance. However, experimental discovery and screening of large peptide libraries are expensive and time-consuming.
 
-Dataset Preparation
-        ↓
-ESM-2 Sequence Embeddings
-        ↓
-AMP / Non-AMP Classification
-        ↓
-Length-based AMP Partitioning
-        ↓
-┌───────────────────────┬───────────────────────┐
-│ Short Peptide Branch  │ Long Peptide Branch   │
-│ 5–40 aa               │ 41–60 aa              │
-└───────────┬───────────┴───────────┬───────────┘
-            ↓                       ↓
-      Transformer-VAE         Transformer-VAE
-            ↓                       ↓
-      Latent Representation   Latent Representation
-            ↓                       ↓
-       Latent Diffusion        Latent Diffusion
-            ↓                       ↓
-       Generated Latents       Generated Latents
-            ↓                       ↓
-       LSTM Decoder            LSTM Decoder
-            └───────────┬───────────┘
-                        ↓
-                 Generated Peptides
-                        ↓
-                  AMP Screening
-                        ↓
-                Hemolysis Screening
-                        ↓
-                  Novelty Analysis
-                        ↓
-       Physicochemical & Composition Analysis
-                        ↓
-                    UMAP Analysis
+This project investigates a computational approach for generating novel AMP candidates by learning peptide representations in a continuous latent space and performing generative modeling within that space.
+
+The framework uses **two separate generation branches**:
+
+- **Short peptides:** 5–40 amino acids
+- **Long peptides:** 41–60 amino acids
+
+Each branch uses its own Transformer-VAE, latent diffusion model, and LSTM sequence decoder.
+
+Generated sequences are subsequently evaluated using AMP activity prediction, hemolysis screening, novelty analysis, physicochemical characterization, amino-acid composition analysis, and embedding-space visualization.
+
+> **Important:** The generated peptides are computational candidates and have not been experimentally validated. Biological activity and toxicity must be confirmed through appropriate wet-lab experiments.
 
 ---
 
-## Key Components
-
-### 1. Dataset Preparation
-
-Two sequence sources were used:
-
-- **DRAMP** — antimicrobial peptide sequences
-- **UniProt** — non-antimicrobial protein sequences
-
-The preprocessing notebooks are located in:
+# Framework
 
 ```text
-data/processed_data&code/
+                    ┌─────────────────────┐
+                    │    DRAMP AMP Data   │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Data Preprocessing  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │  Length Partition   │
+                    └──────────┬──────────┘
+                               │
+                 ┌─────────────┴─────────────┐
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌─────────────────┐
+        │ Short Branch    │         │ Long Branch     │
+        │ 5–40 aa         │         │ 41–60 aa        │
+        └────────┬────────┘         └────────┬────────┘
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌─────────────────┐
+        │ Transformer-VAE │         │ Transformer-VAE │
+        └────────┬────────┘         └────────┬────────┘
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌─────────────────┐
+        │ Latent Space    │         │ Latent Space    │
+        └────────┬────────┘         └────────┬────────┘
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌─────────────────┐
+        │ Latent Diffusion│         │ Latent Diffusion│
+        └────────┬────────┘         └────────┬────────┘
+                 │                           │
+                 ▼                           ▼
+        ┌─────────────────┐         ┌─────────────────┐
+        │ LSTM Decoder    │         │ LSTM Decoder    │
+        └────────┬────────┘         └────────┬────────┘
+                 │                           │
+                 └─────────────┬─────────────┘
+                               ▼
+                    ┌─────────────────────┐
+                    │ Generated Peptides  │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ AMP Activity Filter │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Hemolysis Filter    │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+                    ┌─────────────────────┐
+                    │ Novelty Analysis    │
+                    └──────────┬──────────┘
+                               │
+                               ▼
+              ┌────────────────────────────────┐
+              │ Biological / Sequence Analysis │
+              ├────────────────────────────────┤
+              │ • Physicochemical Properties   │
+              │ • Amino Acid Composition       │
+              │ • Length Distribution          │
+              │ • UMAP Embedding Analysis      │
+              └────────────────────────────────┘
