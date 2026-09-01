@@ -221,9 +221,6 @@ Short Peptide Candidates
 Relevant notebooks:
 
 ```
-```
-
-```
 new_diffusion/
 │
 ├── prepare_sequences.ipynb
@@ -244,16 +241,10 @@ new_diffusion/
 ## Length Range
 
 ```
-```
-
-```
 41–60 amino acids
 ```
 
 The long branch follows:
-
-```
-```
 
 ```
 AMP Sequences
